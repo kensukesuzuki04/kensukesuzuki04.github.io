@@ -7,6 +7,23 @@
 <meta name="description" content="Kensuke Suzuki, Assistant Professor of Economics at Clark University. Research in international trade and spatial economics.">
 <link rel="icon" type="image/png" href="images/clark-favicon.png">
 <link rel="stylesheet" href="assets/css/site.css">
+<style>
+details > summary {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+  font-size: .82rem;
+  font-weight: bold;
+  color: var(--clark);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin: 1.2rem 0 .3rem;
+  user-select: none;
+}
+details > summary::-webkit-details-marker { display: none; }
+details > summary::after { content: ' \25B8'; font-size: .75em; vertical-align: .05em; }
+details[open] > summary::after { content: ' \25BE'; }
+</style>
 </head>
 <body>
 
@@ -51,56 +68,15 @@
     <h2 class="section" id="publications">Publications</h2>
 
     <h3 style="font-size:.82rem;color:var(--clark);text-transform:uppercase;letter-spacing:.06em;margin:1.2rem 0 .3rem;">Working Papers</h3>
-    <ul class="list">
-      <li>
-        <a class="item-title" href="papers/gains_foreign_employment_jmp.pdf">Gains from Foreign Employment: Regional and Sectoral Implications</a>
-        <div class="item-desc">Job Market Paper. Joint with Yasuhiro Doi. [<a href="papers/gains_foreign_employment_jmp.pdf">PDF</a>]</div>
-      </li>
-      <li>
-        <a class="item-title" href="papers/trade_policy_structural_change.pdf">Trade Policy and Structural Change</a>
-        <div class="item-desc">Joint with Hayato Kato and Motoaki Takahashi. [<a href="papers/trade_policy_structural_change.pdf">PDF</a>]</div>
-      </li>
-      <li>
-        <a class="item-title" href="papers/spatial_chinese_firms.pdf">Trade Costs, Entry Costs, and the Spatial Distribution of Chinese Manufacturing Firms</a>
-        <div class="item-desc">Joint with Zeyi Qian and Junfu Zhang. [<a href="papers/spatial_chinese_firms.pdf">PDF</a>]</div>
-      </li>
-    </ul>
+    <ul class="list" id="papers-working"></ul>
 
     <h3 style="font-size:.82rem;color:var(--clark);text-transform:uppercase;letter-spacing:.06em;margin:1.2rem 0 .3rem;">Refereed Articles</h3>
-    <ul class="list">
-      <li>
-        <a class="item-title" href="papers/wage_gap_tasks_japan_2025.pdf">Foreign-Native Wage Gap and Tasks: Evidence from the Japanese Labor Market</a>
-        <div class="item-desc"><em>Economics Letters</em>, 255, 112571 (2025). Joint with Yasuhiro Doi. [<a href="papers/wage_gap_tasks_japan_2025.pdf">PDF</a>]</div>
-      </li>
-      <li>
-        <a class="item-title" href="papers/ho_malaysia_singapore_2019.pdf">Industrial Development in Malaysia and Singapore: Empirical Analysis with a Multiple-Cone Heckscher–Ohlin Model</a>
-        <div class="item-desc"><em>Review of Development Economics</em>, 23(2) (2019). Joint with Yasuhiro Doi. [<a href="papers/ho_malaysia_singapore_2019.pdf">PDF</a>]</div>
-      </li>
-      <li>
-        <span class="item-title">Public Perceptions, Individual Characteristics, and Preventive Behaviors for COVID-19 in Six Countries: A Cross-Sectional Study</span>
-        <div class="item-desc"><em>Environmental Health and Preventive Medicine</em> (2021). [<a href="https://doi.org/10.1186/s12199-021-00952-2">DOI</a>]</div>
-      </li>
-    </ul>
+    <ul class="list" id="papers-refereed"></ul>
 
-    <h3 style="font-size:.82rem;color:var(--clark);text-transform:uppercase;letter-spacing:.06em;margin:1.2rem 0 .3rem;">Other Working Papers</h3>
-    <ul class="list">
-      <li>
-        <a class="item-title" href="papers/intermediate_imports_china_2020.pdf">Trade Liberalization and Intermediate Imports: Evidence from Chinese Firm-Level Data</a>
-        <div class="item-desc">[<a href="papers/intermediate_imports_china_2020.pdf">PDF</a>]</div>
-      </li>
-      <li>
-        <a class="item-title" href="papers/dynamic_import_china_2019.pdf">Dynamic Decision of Import: Evidence from Chinese Firm-Level Data, 2000–2006</a>
-        <div class="item-desc">[<a href="papers/dynamic_import_china_2019.pdf">PDF</a>]</div>
-      </li>
-      <li>
-        <a class="item-title" href="papers/ho_cone_test.pdf">Empirical Test of the Single- and Multiple-Cone Heckscher–Ohlin Model</a>
-        <div class="item-desc">[<a href="papers/ho_cone_test.pdf">PDF</a>]</div>
-      </li>
-      <li>
-        <a class="item-title" href="papers/eu_crossborder_labor_germany.pdf">Institutional Agenda in the European Cross-Border Labor Market and Initiatives of an Employment Agency in Germany</a>
-        <div class="item-desc">In Japanese. Joint with Yasuhiro Doi. [<a href="papers/eu_crossborder_labor_germany.pdf">PDF</a>]</div>
-      </li>
-    </ul>
+    <details>
+      <summary>Other Working Papers</summary>
+      <ul class="list" id="papers-other"></ul>
+    </details>
 
     <h2 class="section" id="teaching">Teaching</h2>
     <p>Course materials, slides, syllabi, and data &amp; AI resources are collected on my
@@ -115,5 +91,130 @@
 </div>
 
 <footer class="site-footer">© 2026 Kensuke Suzuki · Clark University</footer>
+
+<script>
+// ============================================================
+//  PAPER DATA — edit here to add / update papers
+//  Fields:
+//    title       (required)
+//    href        link on the title; null if not clickable
+//    journalName journal name (plain text); omit for working papers
+//    journalVol  volume/issue/year string, e.g. "255, 112571 (2025)"; omit if none
+//    year        fallback year shown as "(2021)" when journalVol is absent
+//    note        free-text note, e.g. "Job Market Paper", "In Japanese"
+//    coauthors   e.g. "Joint with Yasuhiro Doi"
+//    pdf         path to PDF, e.g. "papers/filename.pdf"; omit if none
+//    doi         full DOI URL; omit if none
+// ============================================================
+
+const PAPERS = {
+
+  working: [
+    {
+      title: "Gains from Foreign Employment: Regional and Sectoral Implications",
+      href: "papers/gains_foreign_employment_jmp.pdf",
+      note: "Job Market Paper",
+      coauthors: "Joint with Yasuhiro Doi",
+      pdf: "papers/gains_foreign_employment_jmp.pdf"
+    },
+    {
+      title: "Trade Policy and Structural Change",
+      href: "papers/trade_policy_structural_change.pdf",
+      coauthors: "Joint with Hayato Kato and Motoaki Takahashi",
+      pdf: "papers/trade_policy_structural_change.pdf"
+    },
+    {
+      title: "Trade Costs, Entry Costs, and the Spatial Distribution of Chinese Manufacturing Firms",
+      href: "papers/spatial_chinese_firms.pdf",
+      coauthors: "Joint with Zeyi Qian and Junfu Zhang",
+      pdf: "papers/spatial_chinese_firms.pdf"
+    }
+  ],
+
+  refereed: [
+    {
+      title: "Foreign-Native Wage Gap and Tasks: Evidence from the Japanese Labor Market",
+      href: "papers/wage_gap_tasks_japan_2025.pdf",
+      journalName: "Economics Letters",
+      journalVol: "255, 112571 (2025)",
+      coauthors: "Joint with Yasuhiro Doi",
+      pdf: "papers/wage_gap_tasks_japan_2025.pdf"
+    },
+    {
+      title: "Industrial Development in Malaysia and Singapore: Empirical Analysis with a Multiple-Cone Heckscher–Ohlin Model",
+      href: "papers/ho_malaysia_singapore_2019.pdf",
+      journalName: "Review of Development Economics",
+      journalVol: "23(2) (2019)",
+      coauthors: "Joint with Yasuhiro Doi",
+      pdf: "papers/ho_malaysia_singapore_2019.pdf"
+    },
+    {
+      title: "Public Perceptions, Individual Characteristics, and Preventive Behaviors for COVID-19 in Six Countries: A Cross-Sectional Study",
+      href: null,
+      journalName: "Environmental Health and Preventive Medicine",
+      year: 2021,
+      doi: "https://doi.org/10.1186/s12199-021-00952-2"
+    }
+  ],
+
+  other: [
+    {
+      title: "Trade Liberalization and Intermediate Imports: Evidence from Chinese Firm-Level Data",
+      href: "papers/intermediate_imports_china_2020.pdf",
+      pdf: "papers/intermediate_imports_china_2020.pdf"
+    },
+    {
+      title: "Dynamic Decision of Import: Evidence from Chinese Firm-Level Data, 2000–2006",
+      href: "papers/dynamic_import_china_2019.pdf",
+      pdf: "papers/dynamic_import_china_2019.pdf"
+    },
+    {
+      title: "Empirical Test of the Single- and Multiple-Cone Heckscher–Ohlin Model",
+      href: "papers/ho_cone_test.pdf",
+      pdf: "papers/ho_cone_test.pdf"
+    },
+    {
+      title: "Institutional Agenda in the European Cross-Border Labor Market and Initiatives of an Employment Agency in Germany",
+      href: "papers/eu_crossborder_labor_germany.pdf",
+      note: "In Japanese",
+      coauthors: "Joint with Yasuhiro Doi",
+      pdf: "papers/eu_crossborder_labor_germany.pdf"
+    }
+  ]
+
+};
+
+// ============================================================
+//  RENDER — no need to edit below
+// ============================================================
+
+function renderPaperList(id, papers) {
+  document.getElementById(id).innerHTML = papers.map(function(p) {
+    var titleEl = p.href
+      ? '<a class="item-title" href="' + p.href + '">' + p.title + '</a>'
+      : '<span class="item-title">' + p.title + '</span>';
+
+    var d = [];
+    if (p.journalName) {
+      var j = '<em>' + p.journalName + '</em>';
+      if (p.journalVol) j += ', ' + p.journalVol;
+      else if (p.year) j += ' (' + p.year + ')';
+      d.push(j);
+    }
+    if (p.note) d.push(p.note);
+    if (p.coauthors) d.push(p.coauthors);
+    var links = [];
+    if (p.pdf) links.push('[<a href="' + p.pdf + '">PDF</a>]');
+    if (p.doi) links.push('[<a href="' + p.doi + '">DOI</a>]');
+    if (links.length) d.push(links.join(' '));
+
+    return '<li>' + titleEl + '<div class="item-desc">' + d.join('. ') + '</div></li>';
+  }).join('');
+}
+
+renderPaperList('papers-working',  PAPERS.working);
+renderPaperList('papers-refereed', PAPERS.refereed);
+renderPaperList('papers-other',    PAPERS.other);
+</script>
 </body>
 </html>
