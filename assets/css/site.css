@@ -83,6 +83,8 @@ a.item-title:hover { color: var(--clark); }
 .muted { color: var(--muted); font-size: .9rem; }
 .news-date { display: inline-block; min-width: 4.6rem; font-weight: 700;
              color: var(--clark); letter-spacing: .02em; }
+.news-text, .news-text a { color: #1a1a1a; }
+.news-text a:hover { color: var(--clark); }
 
 /* Footer */
 .site-footer { max-width: 1100px; margin: 1rem auto 0; padding: 1.5rem;

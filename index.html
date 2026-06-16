@@ -112,9 +112,15 @@ details[open] > summary::after { content: ' \25BE'; }
 
 const NEWS = [
   {
-    date: "June 2026",
-    text: "Upcoming presentation: \"Summer Workshop on Economic Theory\"",
+    date: "August 2026",
+    text: "Upcoming presentation at : \"Summer Workshop on Economic Theory\" at the Sapporo Campus of the Otaru University of Commerce",
     href: "https://sites.google.com/view/swetotaruhokudai/home" ,
+    external: true
+  },
+  {
+    date: "September 2026",
+    text: "Upcoming presentation at : \"European Trade Study Group\" at the University of Exeter",
+    href: "https://etsg.org/" ,
     external: true
   }
 ];
@@ -246,7 +252,7 @@ function renderNewsList(id, items) {
     var body = n.href
       ? '<a href="' + n.href + '"' + (n.external ? ' target="_blank" rel="noopener"' : '') + '>' + n.text + '</a>'
       : n.text;
-    return '<li><span class="news-date">' + n.date + '</span> ' + body + '</li>';
+    return '<li><span class="news-date">' + n.date + '</span> <span class="news-text">' + body + '</span></li>';
   }).join('');
 }
 
