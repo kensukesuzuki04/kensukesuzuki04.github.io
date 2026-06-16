@@ -31,10 +31,9 @@ details[open] > summary::after { content: ' \25BE'; }
   <div class="masthead__inner">
     <a class="site-title" href="/">Kensuke Suzuki</a>
     <nav class="site-nav">
-      <a href="#publications">Publications</a>
+      <a href="https://kensukesuzuki04.github.io/files/cv.pdf">CV</a>
+      <a href="https://kensukesuzuki04.github.io/#research">Research</a>
       <a href="https://kensukesuzuki04.github.io/teaching/">Teaching</a>
-      <a href="files/cv.pdf">CV</a>
-      <a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
@@ -46,10 +45,10 @@ details[open] > summary::after { content: ' \25BE'; }
     <div class="role">Assistant Professor of Economics, Clark University</div>
     <ul class="links">
       <li><a href="mailto:KSuzuki@clarku.edu">Email</a></li>
-      <li><a href="files/cv.pdf">CV</a></li>
-      <li><a href="https://github.com/kensukesuzuki04">GitHub</a></li>
-      <li><a href="https://www.linkedin.com/in/kensuke-suzuki-789b34130/">LinkedIn</a></li>
-      <li><a href="https://x.com/kensuzuki_econ">X (Twitter)</a></li>
+      <li><a href="files/cv.pdf" target="_blank" rel="noopener">CV</a></li>
+      <li><a href="https://github.com/kensukesuzuki04" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/kensuke-suzuki-789b34130/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://x.com/kensuzuki_econ" target="_blank" rel="noopener">X (Twitter)</a></li>
     </ul>
   </aside>
 
@@ -62,10 +61,13 @@ details[open] > summary::after { content: ' \25BE'; }
        My research focuses on <strong>international trade and spatial economics</strong>, with recent work on
        the labor-market and regional implications of foreign employment in Japan.</p>
     <p style="margin-top:.8rem;">I received my Ph.D. in Economics from the Pennsylvania State University.
-       You can download my <a href="files/cv.pdf">CV</a>, and find course materials on my
+       You can download my <a href="files/cv.pdf" target="_blank" rel="noopener">CV</a>, and find course materials on my
        <a href="https://kensukesuzuki04.github.io/teaching/">Teaching page</a>.</p>
 
-    <h2 class="section" id="publications">Publications</h2>
+    <h2 class="section" id="news">News</h2>
+    <ul class="list" id="news-list"></ul>
+
+    <h2 class="section" id="research">Research</h2>
 
     <h3 style="font-size:.82rem;color:var(--clark);text-transform:uppercase;letter-spacing:.06em;margin:1.2rem 0 .3rem;">Working Papers</h3>
     <ul class="list" id="papers-working"></ul>
@@ -93,6 +95,24 @@ details[open] > summary::after { content: ' \25BE'; }
 <footer class="site-footer">© 2026 Kensuke Suzuki · Clark University</footer>
 
 <script>
+// ============================================================
+//  NEWS DATA — edit here to add / update news items
+//  Fields:
+//    date     (required) e.g. "Jun 2026"
+//    text     (required) the announcement text
+//    href     link target; omit if not clickable
+//    external set true to open href in a new tab
+// ============================================================
+
+const NEWS = [
+  {
+    date: "Jun 2026",
+    text: "New working paper: \"Gains from Foreign Employment: Regional and Sectoral Implications.\"",
+    href: "papers/gains_foreign_employment_jmp.pdf",
+    external: true
+  }
+];
+
 // ============================================================
 //  PAPER DATA — edit here to add / update papers
 //  Fields:
@@ -188,10 +208,19 @@ const PAPERS = {
 //  RENDER — no need to edit below
 // ============================================================
 
+function renderNewsList(id, items) {
+  document.getElementById(id).innerHTML = items.map(function(n) {
+    var body = n.href
+      ? '<a href="' + n.href + '"' + (n.external ? ' target="_blank" rel="noopener"' : '') + '>' + n.text + '</a>'
+      : n.text;
+    return '<li><span class="news-date">' + n.date + '</span> ' + body + '</li>';
+  }).join('');
+}
+
 function renderPaperList(id, papers) {
   document.getElementById(id).innerHTML = papers.map(function(p) {
     var titleEl = p.href
-      ? '<a class="item-title" href="' + p.href + '">' + p.title + '</a>'
+      ? '<a class="item-title" href="' + p.href + '" target="_blank" rel="noopener">' + p.title + '</a>'
       : '<span class="item-title">' + p.title + '</span>';
 
     var d = [];
@@ -204,14 +233,15 @@ function renderPaperList(id, papers) {
     if (p.note) d.push(p.note);
     if (p.coauthors) d.push(p.coauthors);
     var links = [];
-    if (p.pdf) links.push('[<a href="' + p.pdf + '">PDF</a>]');
-    if (p.doi) links.push('[<a href="' + p.doi + '">DOI</a>]');
+    if (p.pdf) links.push('[<a href="' + p.pdf + '" target="_blank" rel="noopener">PDF</a>]');
+    if (p.doi) links.push('[<a href="' + p.doi + '" target="_blank" rel="noopener">DOI</a>]');
     if (links.length) d.push(links.join(' '));
 
     return '<li>' + titleEl + '<div class="item-desc">' + d.join('. ') + '</div></li>';
   }).join('');
 }
 
+renderNewsList('news-list', NEWS);
 renderPaperList('papers-working',  PAPERS.working);
 renderPaperList('papers-refereed', PAPERS.refereed);
 renderPaperList('papers-other',    PAPERS.other);
