@@ -12,7 +12,7 @@ details > summary {
   display: block;
   list-style: none;
   cursor: pointer;
-  font-size: .82rem;
+  font-size: 1.05rem;
   font-weight: bold;
   color: var(--clark);
   text-transform: uppercase;
@@ -69,13 +69,13 @@ details[open] > summary::after { content: ' \25BE'; }
 
     <h2 class="section" id="research">Research</h2>
 
-    <h3 style="font-size:.82rem;color:var(--clark);text-transform:uppercase;letter-spacing:.06em;margin:1.2rem 0 .3rem;">Refereed Articles</h3>
+    <h3 style="font-size:1.05rem;color:var(--clark);text-transform:uppercase;letter-spacing:.06em;margin:1.2rem 0 .3rem;">Refereed Articles</h3>
     <ul class="list" id="papers-refereed"></ul>
 
-    <h3 style="font-size:.82rem;color:var(--clark);text-transform:uppercase;letter-spacing:.06em;margin:1.2rem 0 .3rem;">Working Papers</h3>
+    <h3 style="font-size:1.05rem;color:var(--clark);text-transform:uppercase;letter-spacing:.06em;margin:1.2rem 0 .3rem;">Working Papers</h3>
     <ul class="list" id="papers-working"></ul>
 
-    <h3 style="font-size:.82rem;color:var(--clark);text-transform:uppercase;letter-spacing:.06em;margin:1.2rem 0 .3rem;">Work in Progress</h3>
+    <h3 style="font-size:1.05rem;color:var(--clark);text-transform:uppercase;letter-spacing:.06em;margin:1.2rem 0 .3rem;">Work in Progress</h3>
     <ul class="list" id="papers-progress"></ul>
 
     <details>
@@ -83,7 +83,7 @@ details[open] > summary::after { content: ' \25BE'; }
       <ul class="list" id="papers-other"></ul>
     </details>
 
-    <h3 style="font-size:.82rem;color:var(--clark);text-transform:uppercase;letter-spacing:.06em;margin:1.2rem 0 .3rem;">Publications in Japanese</h3>
+    <h3 style="font-size:1.05rem;color:var(--clark);text-transform:uppercase;letter-spacing:.06em;margin:1.2rem 0 .3rem;">Publications in Japanese</h3>
     <ul class="list" id="papers-japanese"></ul>
 
     <h2 class="section" id="teaching">Teaching</h2>
@@ -219,25 +219,28 @@ const PAPERS = {
 
   japanese: [
     {
-      title: "外国人労働者の賃金は低いのか？ 厚生労働省・賃金構造基本調査のデータによる回帰分析",
-      journalName: "異文化経営研究",
-      journalVol: "第22号（2026、刊行予定）",
-      note: "査読あり",
-      coauthors: "共著：土井康裕"
+      title: "Are Wages for Foreign Workers Low? A Regression Analysis Using Data from the MHLW Basic Survey on Wage Structure",
+      original: "外国人労働者の賃金は低いのか？ 厚生労働省・賃金構造基本調査のデータによる回帰分析",
+      journalName: "Transcultural Management Review",
+      journalVol: "No. 22 (forthcoming, 2026)",
+      note: "Refereed",
+      coauthors: "Joint with Yasuhiro Doi"
     },
     {
-      title: "自由貿易地域における2国の産業発展に関する実証研究―1990年から2010年までのマレーシアとシンガポールの分析―",
-      journalName: "経済政策ジャーナル",
-      journalVol: "第14巻, 第1・2号（2018）",
-      note: "査読あり",
-      coauthors: "共著：土井康裕"
+      title: "An Empirical Study on Industrial Development of Two Countries in a Free Trade Area: Malaysia and Singapore, 1990–2010",
+      original: "自由貿易地域における2国の産業発展に関する実証研究―1990年から2010年までのマレーシアとシンガポールの分析―",
+      journalName: "Journal of Economic Policy Studies",
+      journalVol: "14(1-2) (2018)",
+      note: "Refereed",
+      coauthors: "Joint with Yasuhiro Doi"
     },
     {
-      title: "欧州国境地域における越境労働市場の現状―オーバーライン地域のモデルケース―",
-      journalName: "経済科学",
-      journalVol: "名古屋大学大学院経済学研究科（2012）",
-      note: "査読なし",
-      coauthors: "共著：土井康裕"
+      title: "The Current State of the Cross-Border Labor Market in the European Border Region: The Model Case of the Oberrhein Region",
+      original: "欧州国境地域における越境労働市場の現状―オーバーライン地域のモデルケース―",
+      journalName: "Keizai Kagaku",
+      journalVol: "Graduate School of Economics, Nagoya University (2012)",
+      note: "Not refereed",
+      coauthors: "Joint with Yasuhiro Doi"
     }
   ]
 
@@ -276,7 +279,9 @@ function renderPaperList(id, papers) {
     if (p.doi) links.push('[<a href="' + p.doi + '" target="_blank" rel="noopener">DOI</a>]');
     if (links.length) d.push(links.join(' '));
 
-    return '<li>' + titleEl + '<div class="item-desc">' + d.join('. ') + '</div></li>';
+    var original = p.original ? '<div class="item-original">' + p.original + '</div>' : '';
+
+    return '<li>' + titleEl + '<div class="item-desc">' + d.join('. ') + '</div>' + original + '</li>';
   }).join('');
 }
 

@@ -77,6 +77,7 @@ h2.section:first-of-type { margin-top: 1.5rem; }
 .item-title { font-weight: 700; color: #1a1a1a; font-size: 1.05rem; }
 a.item-title:hover { color: var(--clark); }
 .item-desc { color: var(--muted); font-size: .9rem; margin-top: .2rem; }
+.item-original { color: var(--muted); font-size: .78rem; margin-top: .15rem; opacity: .75; }
 .badge { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .03em;
          color: #fff; background: var(--muted); border-radius: 3px; padding: .08rem .4rem;
          margin-left: .4rem; vertical-align: middle; }
